@@ -1,6 +1,7 @@
 .wrapper{
   width: 600px;
  }
+
 .divider{
  line-height: 1.5;
  color: black;
@@ -60,9 +61,6 @@
 .divider-with-text-right::after{
   width: 5%;
 }
-
-
-
 
 .divider-inner-text{
   display: inline-block;

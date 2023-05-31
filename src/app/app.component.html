@@ -1,13 +1,13 @@
 <!-- parameter -->
+<div>
+  <h1 style="text-align: center;">divider block</h1>
+</div>
 <div style="display:flex;justify-content: center;">
   <div class="wrapper">
     <div>
       <div>
         <h2>Size</h2>
         <div>
-          <span style="margin-left: 10px;display: inline-flex;align-items: center;">
-            light : <input type="radio" name="size" value="0.5" (change)="onChangeSize($event)" [checked]="0.5 == size" />
-          </span>
           <span style="margin-left: 10px;display: inline-flex;align-items: center;">normal : <input type="radio" name="size" value="1" (change)="onChangeSize($event)" [checked]="1 == size"/></span>
           <span style="margin-left: 10px;display: inline-flex;align-items: center;">bold: <input type="radio" name="size" value="4" (change)="onChangeSize($event)" [checked]="size == 4"/></span>
         </div>
@@ -23,7 +23,8 @@
         <div *ngIf="dividerWithText">
           <div style="margin-top: 10px;">
             text: <br/>
-            <input type="text" name="dividerText" [value]="dividerText" style="margin-top: 6px;" (change)="onChangeText($event)"/>
+            <input type="text" name="dividerText" [ngModel]="dividerText" style="margin-top: 6px;" (ngModelChange)="onChangeText($event)"/>
+            <input type="color" name="textColor" [value]="textColor" (change)="onChangeTextColor($event)">
           </div>
           <div style="margin-top: 10px;">
             align: <br/>
@@ -49,9 +50,8 @@
       [class.divider-with-text]="dividerWithText"
       [class.divider-with-text-left]="dividerAlignText === 'left'"
       [class.divider-with-text-right]="dividerAlignText === 'right'"
-
       >
-      <span *ngIf="dividerWithText" class="divider-inner-text">{{dividerText}}</span>
+      <span *ngIf="dividerWithText" class="divider-inner-text" [style.color]="textColor" [style.fontWeight]="size == 4 ? 'bold' : 'normal'">{{dividerText}}</span>
     </div>
     </div>
   </div>

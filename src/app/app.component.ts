@@ -6,12 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'blocks-app';
   size = 1;
   color = "#121fd9"
   dividerWithText = false;
   dividerText="test";
   dividerAlignText="center";
+  textColor="#000000"
 
 
   onChangeSize(e:any){
@@ -25,11 +25,14 @@ export class AppComponent {
     this.dividerWithText = !this.dividerWithText;
   }
 
-  onChangeText(e:any){
-    this.dividerText = e.target.value;
+  onChangeText(value:any){
+    this.dividerText = value;
   }
   onChangeAlignText(e:any){
-    this.dividerAlignText = e.target.value
+    this.dividerAlignText = e.target.value;
+  }
+  onChangeTextColor(e:any){
+    this.textColor = e.target.value;
   }
 
 }
