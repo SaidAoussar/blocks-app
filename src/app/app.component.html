@@ -5,15 +5,8 @@
 <div>
   <div class="wrapper">
     <div class="parameters">
-      <div class="parameter divider-size">
-        <label>Size</label>
-        <mat-radio-group placeholder="size" aria-label="Select an option" [ngModelOptions]="{standalone: true}" [(ngModel)]="size">
-          <mat-radio-button [value]="1" >normal</mat-radio-button>
-          <mat-radio-button [value]="4">bold</mat-radio-button>
-        </mat-radio-group>
-      </div>
       <div class="parameter divider-color">
-        <label>Color</label>
+        <label>Divider Color</label>
         <input type="color" name="color" [value]="color" (change)="onChangeColor($event)">
       </div>
       <div class="parameter divider-height">
@@ -25,7 +18,6 @@
       </div>
       <div class="parameter divider-width">
         <label>divder width</label>
-        <!-- <input type="number" name="width" [ngModel]="dividerWidth" min="0" (ngModelChange)="onChangeWidth($event)"/> -->
         <mat-form-field appearance="standard" style="margin-right: 8px;">
           <input matInput type="number" [min]="0" [(ngModel)]="dividerWidth"/>
         </mat-form-field>
@@ -35,52 +27,66 @@
             <mat-option value="px">px</mat-option>
           </mat-select>
         </mat-form-field>
-        <select name="width-unit" [ngModel]="dividerWidthUnit" (ngModelChange)="onChangeWidthUnit($event)">
-          <option value="px">px</option>
-          <option value="%">%</option>
-        </select>
       </div>
       <div class="parameter divider-position">
         <label>divider position</label>
-        <div class="parameter-options">
-          <span style="margin-left: 10px;display: inline-flex;align-items: center;">left : <input type="radio" name="divider-position" value="start" (change)="onChangePosition($event)" [checked]="dividerPosition == 'start'"/></span>
-          <span style="margin-left: 10px;display: inline-flex;align-items: center;">center : <input type="radio" name="divider-position" value="center" (change)="onChangePosition($event)" [checked]="dividerPosition == 'center'"/></span>
-          <span style="margin-left: 10px;display: inline-flex;align-items: center;">right: <input type="radio" name="divider-position" value="end" (change)="onChangePosition($event)" [checked]="dividerPosition == 'end'"/></span>
-        </div>
+        <mat-radio-group placeholder="position" aria-label="Select an option" [(ngModel)]="dividerPosition">
+          <mat-radio-button value="start">start</mat-radio-button>
+          <mat-radio-button value="center">center</mat-radio-button>
+          <mat-radio-button value="end">end</mat-radio-button>
+        </mat-radio-group>
       </div>
-      <div class="parameter divider-text">
-        add text to hr: <input type="checkbox" style="margin-top: 10px;" [checked]="dividerWithText" (change)="toggleText()"/>
-        <div *ngIf="dividerWithText">
-          <div style="margin-top: 10px;">
-            text: <br/>
-            <input type="text" name="dividerText" [ngModel]="dividerText" style="margin-top: 6px;" (ngModelChange)="onChangeText($event)"/>
-            <input type="color" name="textColor" [value]="textColor" (change)="onChangeTextColor($event)">
+      <div class="parameter divider-text-option">
+        <label>Divider with text</label>
+        <mat-radio-group aria-label="Select an option" [(ngModel)]="dividerWithText">
+          <mat-radio-button [value]="true">Yes</mat-radio-button>
+          <mat-radio-button [value]="false">False</mat-radio-button>
+        </mat-radio-group>
+      </div>
+        <div class="parameter text-parameters" *ngIf="dividerWithText">
+          <div class="parameter text-value">
+            <label>Text</label>
+            <mat-form-field appearance="standard" style="margin-right: 8px;">
+              <input matInput type="text" placeholder="Text" [(ngModel)]="dividerText"/>
+            </mat-form-field>
+            <input type="color" [(ngModel)]="textColor"/>
           </div>
-          <div class="parameter-text text-size">
-            text size <br/>
-            <input type="number" min="6" [value]="textSize" (change)="onChangeTextSize($event)"/>
+          <div class="parameter text-font-family">
+            <label>Font Family</label>
+            <mat-form-field appearance="standard">
+              <input matInput type="text" [value]="textFontFamily" (change)="onChangeTextFontFamily($event)"/>
+            </mat-form-field>
           </div>
-          <div class="parameter-text text-font-family">
-            font family <br/>
-            <!-- do -->
-            <input type="text" [value]="textFontFamily" (change)="onChangeTextFontFamily($event)"/>
+          <div class="parameter text-font-size">
+            <label>Font Size</label>
+            <mat-form-field appearance="standard">
+              <input matInput type="number" [min]="6" [value]="textSize"  (change)="onChangeTextSize($event)"/>
+              <span matSuffix style="margin-left: 10px;font-weight: 500;">px</span>
+            </mat-form-field>
           </div>
-          <div style="margin-top: 10px;">
-            align: <br/>
-            <div style="margin-top: 6px;">
-              <span>
-                left: <input type="radio" name="alignText" value="left" [checked]="dividerAlignText == 'left'" (change)="onChangeAlignText($event)"/>
-              </span>
-              <span>
-                center: <input type="radio" name="alignText" value="center" [checked]="dividerAlignText == 'center'" (change)="onChangeAlignText($event)"/>
-              </span>
-              <span>
-                right: <input type="radio" name="alignText" value="right" [checked]="dividerAlignText == 'right'" (change)="onChangeAlignText($event)"/>
-              </span>
-            </div>
+          <div class="parameter text-font-weight">
+            <label>Font Weight</label>
+            <mat-form-field appearance="standard">
+              <mat-select [(ngModel)]="textFontWeight">
+                <mat-option [value]="100">Thin</mat-option>
+                <mat-option [value]="300">Light</mat-option>
+                <mat-option [value]="400">Normal</mat-option>
+                <mat-option [value]="500">Medium</mat-option>
+                <mat-option [value]="600">Semi Bold</mat-option>
+                <mat-option [value]="700">Bold</mat-option>
+                <mat-option [value]="800">Extra Bold</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="parameter text-align" style="margin-top: 10px;">
+            <label>Align</label>
+            <mat-radio-group placeholder="align" aria-label="Select an option" [(ngModel)]="textAlign">
+              <mat-radio-button value="left" >left</mat-radio-button>
+              <mat-radio-button value="center" >center</mat-radio-button>
+              <mat-radio-button value="right">right</mat-radio-button>
+            </mat-radio-group>
           </div>
         </div>
-      </div>
     </div>
 
     <div class="preview" style="display: grid;align-items: center;border: 2px solid #bebbbb;">
@@ -90,14 +96,16 @@
         [ngStyle]="{'--size':size + 'px'}"
         [style.width]="dividerWidth + dividerWidthUnit"
         [class.divider-with-text]="dividerWithText"
-        [class.divider-with-text-left]="dividerAlignText === 'left'"
-        [class.divider-with-text-right]="dividerAlignText === 'right'"
+        [class.divider-with-text-left]="textAlign === 'left'"
+        [class.divider-with-text-right]="textAlign === 'right'"
         >
           <span *ngIf="dividerWithText"
           class="divider-inner-text"
           [style.color]="textColor"
+          [style.fontFamily]="textFontFamily"
           [style.fontSize]="textSize + 'px'"
-          [style.fontFamily]="textFontFamily">{{dividerText}}</span>
+          [style.fontWeight]="textFontWeight"
+          >{{dividerText}}</span>
         </div>
       </div>
     </div>
