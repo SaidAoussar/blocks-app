@@ -1,0 +1,10 @@
+mat-form-field{
+  &.mat-form-field-appearance-standard{
+    .mat-form-field-infix{
+      border-top-width: 0px;
+    }
+    .mat-form-field-flex{
+      padding-top: 0px;
+    }
+  }
+}

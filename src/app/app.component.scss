@@ -1,5 +1,25 @@
 .wrapper{
-  width: 600px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+ }
+
+ .parameters{
+  margin: 10px;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+
+ }
+
+ .parameter ~ .parameter {
+  margin-top: 16px;
+ }
+
+ label{
+  display: block;
+  margin-bottom: 8px;
+  font-size: 16px;
+  font-weight: 600;
  }
 
 .divider{
@@ -65,6 +85,14 @@
 .divider-inner-text{
   display: inline-block;
   padding: 0 1em;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+
+.mat-form-field-infix{
+  border-top: none;
 }
 
 
